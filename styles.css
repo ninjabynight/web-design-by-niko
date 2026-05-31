@@ -522,3 +522,30 @@ p {
     width: 100%;
   }
 }
+
+@media (max-width: 700px) {
+  .card {
+    padding: 26px 22px;
+  }
+
+  .card p,
+  .card li {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .section-heading p,
+  .page-hero p,
+  .hero p {
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
