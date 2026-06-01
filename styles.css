@@ -1176,3 +1176,103 @@ body::before {
     padding: 26px 22px;
   }
 }
+
+/* Expandable project cards */
+
+.projects-list .grid-3 {
+  align-items: start;
+}
+
+.project-card summary {
+  display: block;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-card-toggle {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--brass);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.project-card-toggle::after {
+  content: "+";
+  margin-left: 8px;
+}
+
+.project-card[open] .project-card-toggle::after {
+  content: "–";
+}
+
+.project-details {
+  margin-top: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 340ms ease,
+    opacity 240ms ease,
+    margin-top 240ms ease,
+    padding-top 240ms ease;
+}
+
+.project-card[open] .project-details {
+  margin-top: 22px;
+  max-height: 520px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(169, 136, 79, 0.24);
+  opacity: 1;
+}
+
+.project-details p {
+  font-size: 0.96rem;
+}
+
+.project-details ul {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding-left: 1.15rem;
+}
+
+.project-details li::marker {
+  color: var(--brass);
+}
+
+/* Keep expandable project cards steady while opening */
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: none;
+  }
+}
+
+.project-card {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-card:focus,
+.project-card summary:focus {
+  outline: none;
+}
+
+.project-card:focus-visible {
+  outline: 2px solid rgba(196, 168, 111, 0.65);
+  outline-offset: 4px;
+}
