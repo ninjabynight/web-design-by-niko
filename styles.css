@@ -321,6 +321,49 @@ p {
   color: rgba(245, 239, 227, 0.68);
 }
 
+.fit-card {
+  align-self: center;
+  background:
+    linear-gradient(135deg, rgba(255, 248, 232, 0.7), rgba(231, 220, 200, 0.54)),
+    rgba(245, 239, 227, 0.58);
+}
+
+.fit-card h3 {
+  margin-bottom: 18px;
+}
+
+.fit-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.fit-card li::marker {
+  color: var(--brass);
+}
+
+.services-cta {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(196, 168, 111, 0.18);
+}
+
+.services-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 40%, rgba(196, 168, 111, 0.14), transparent 28rem),
+    radial-gradient(circle at 82% 52%, rgba(245, 239, 227, 0.045), transparent 24rem);
+}
+
+.services-cta .container {
+  position: relative;
+  z-index: 1;
+}
+
 /* Buttons */
 
 .button {
