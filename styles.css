@@ -781,6 +781,13 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 239, 190, 0.82) 0,
+      rgba(169, 136, 79, 0.68) 2px,
+      rgba(58, 43, 24, 0.32) 3px,
+      transparent 12px
+    ) top / 100% 12px no-repeat,
     radial-gradient(circle at 52% 48%, rgba(196, 168, 111, 0.16), transparent 38%),
     radial-gradient(circle at 68% 52%, rgba(245, 239, 227, 0.055), transparent 42%);
 }
