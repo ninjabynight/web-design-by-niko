@@ -550,7 +550,7 @@ p {
   }
 }
 
-/* Subtle card polish */
+/* Subtle brass card polish */
 
 .service-card,
 .approach-card,
@@ -568,6 +568,17 @@ p {
     background-color 220ms ease;
 }
 
+.service-card > *,
+.approach-card > *,
+.project-card > *,
+.process-card > *,
+.value-card > *,
+.info-card > *,
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
 .service-card::before,
 .approach-card::before,
 .project-card::before,
@@ -578,14 +589,55 @@ p {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    rgba(183, 145, 83, 0.12),
-    transparent 38%
-  );
+  background:
+    linear-gradient(135deg, rgba(196, 168, 111, 0.14), transparent 36%),
+    linear-gradient(180deg, rgba(245, 239, 227, 0.08), transparent 46%);
   opacity: 0;
   transition: opacity 220ms ease;
+}
+
+.service-card::after,
+.approach-card::after,
+.project-card::after,
+.process-card::after,
+.value-card::after,
+.info-card::after,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  z-index: 0;
+  pointer-events: none;
+  padding: 2px;
+  border-radius: calc(var(--radius) - 7px);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(82, 60, 28, 0.48) 0%,
+      rgba(190, 154, 84, 0.72) 18%,
+      rgba(255, 239, 190, 0.82) 29%,
+      rgba(142, 103, 46, 0.62) 43%,
+      rgba(74, 53, 25, 0.42) 56%,
+      rgba(212, 176, 98, 0.76) 74%,
+      rgba(255, 244, 205, 0.72) 84%,
+      rgba(126, 91, 40, 0.5) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 226, 0.28),
+    0 1px 0 rgba(255, 248, 226, 0.08),
+    0 8px 18px rgba(76, 56, 27, 0.08);
+  opacity: 0.78;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition:
+    inset 220ms ease,
+    opacity 220ms ease,
+    box-shadow 220ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -598,7 +650,7 @@ p {
   .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 22px 44px rgba(18, 15, 11, 0.16);
-    border-color: rgba(183, 145, 83, 0.38);
+    border-color: rgba(183, 145, 83, 0.46);
   }
 
   .service-card:hover::before,
@@ -609,6 +661,21 @@ p {
   .info-card:hover::before,
   .card:hover::before {
     opacity: 1;
+  }
+
+  .service-card:hover::after,
+  .approach-card:hover::after,
+  .project-card:hover::after,
+  .process-card:hover::after,
+  .value-card:hover::after,
+  .info-card:hover::after,
+  .card:hover::after {
+    inset: 10px;
+    opacity: 0.96;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 226, 0.34),
+      0 1px 0 rgba(255, 248, 226, 0.12),
+      0 10px 22px rgba(76, 56, 27, 0.12);
   }
 }
 
@@ -701,7 +768,7 @@ body::before {
   background-image: url("images/megalodon-skeleton.png");
   background-repeat: no-repeat;
   background-position: left 180px center;
-  background-size: 1280px auto;
+  background-size: 1360px auto;
   opacity: 0.08;
   filter: grayscale(100%) sepia(14%) brightness(0.98) contrast(1.18) drop-shadow(0 18px 34px rgba(0, 0, 0, 0.38));
   transform: scaleX(-1);
