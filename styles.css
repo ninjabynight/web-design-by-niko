@@ -549,3 +549,185 @@ p {
     justify-content: center;
   }
 }
+
+/* Subtle card polish */
+
+.service-card,
+.approach-card,
+.project-card,
+.process-card,
+.value-card,
+.info-card,
+.card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.service-card::before,
+.approach-card::before,
+.project-card::before,
+.process-card::before,
+.value-card::before,
+.info-card::before,
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(183, 145, 83, 0.12),
+    transparent 38%
+  );
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover,
+  .approach-card:hover,
+  .project-card:hover,
+  .process-card:hover,
+  .value-card:hover,
+  .info-card:hover,
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 44px rgba(18, 15, 11, 0.16);
+    border-color: rgba(183, 145, 83, 0.38);
+  }
+
+  .service-card:hover::before,
+  .approach-card:hover::before,
+  .project-card:hover::before,
+  .process-card:hover::before,
+  .value-card:hover::before,
+  .info-card:hover::before,
+  .card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Subtle Sharkbone texture layer */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(183, 145, 83, 0.08) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 80%, rgba(255, 249, 236, 0.06) 0 1px, transparent 1px),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent 40%, rgba(0, 0, 0, 0.035));
+  background-size:
+    34px 34px,
+    46px 46px,
+    100% 100%;
+  mix-blend-mode: multiply;
+}
+
+/* Homepage megalodon jawbone background */
+
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("images/megalodon-jaw.png");
+  background-repeat: no-repeat;
+  background-position: right -6% center;
+  background-size: min(880px, 66vw);
+  opacity: 0.075;
+  filter: grayscale(100%) sepia(16%) brightness(0.82) contrast(0.94);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 44%, rgba(183, 145, 83, 0.18), transparent 28%),
+    radial-gradient(circle at 58% 34%, rgba(255, 248, 236, 0.055), transparent 42%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-hero .page-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .home-hero::before {
+    background-position: center 22%;
+    background-size: min(560px, 96vw);
+    opacity: 0.075;
+  }
+
+  .home-hero::after {
+    background:
+      radial-gradient(circle at 50% 30%, rgba(183, 145, 83, 0.12), transparent 32%);
+  }
+}
+
+/* The Goal section fossil watermark */
+
+.goal-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  clip-path: inset(0);
+}
+
+.goal-section::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("images/megalodon-skeleton.png");
+  background-repeat: no-repeat;
+  background-position: left 180px center;
+  background-size: 1280px auto;
+  opacity: 0.08;
+  filter: grayscale(100%) sepia(14%) brightness(0.98) contrast(1.18) drop-shadow(0 18px 34px rgba(0, 0, 0, 0.38));
+  transform: scaleX(-1);
+}
+
+.goal-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 52% 48%, rgba(196, 168, 111, 0.16), transparent 38%),
+    radial-gradient(circle at 68% 52%, rgba(245, 239, 227, 0.055), transparent 42%);
+}
+
+.goal-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .goal-section::before {
+    background-position: left 0px center;
+    background-size: 1280px auto;
+    opacity: 0.075;
+    transform: scaleX(-1);
+  }
+}
