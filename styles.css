@@ -1090,3 +1090,89 @@ body::before {
     grid-template-columns: 1fr;
   }
 }
+
+/* Contact page polish */
+
+.contact-section {
+  padding-top: 96px;
+}
+
+.contact-intro {
+  position: relative;
+}
+
+.contact-intro h2 {
+  max-width: 520px;
+}
+
+.contact-intro p:not(.eyebrow) {
+  max-width: 460px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.contact-email {
+  padding-top: 18px;
+}
+
+.contact-form-card {
+  position: relative;
+  padding: 34px;
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 248, 232, 0.68), rgba(231, 220, 200, 0.5)),
+    rgba(245, 239, 227, 0.58);
+  box-shadow: 0 18px 48px rgba(39, 35, 29, 0.08);
+}
+
+.contact-form-card::after {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  pointer-events: none;
+  padding: 2px;
+  border-radius: calc(var(--radius) - 7px);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(82, 60, 28, 0.48) 0%,
+      rgba(190, 154, 84, 0.72) 18%,
+      rgba(255, 239, 190, 0.82) 29%,
+      rgba(142, 103, 46, 0.62) 43%,
+      rgba(74, 53, 25, 0.42) 56%,
+      rgba(212, 176, 98, 0.76) 74%,
+      rgba(255, 244, 205, 0.72) 84%,
+      rgba(126, 91, 40, 0.5) 100%
+    );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.contact-form-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 920px) {
+  .contact-intro {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-section {
+    padding-top: 76px;
+  }
+
+  .contact-form-card {
+    padding: 26px 22px;
+  }
+}
