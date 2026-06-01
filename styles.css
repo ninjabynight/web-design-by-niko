@@ -779,6 +779,10 @@ body::before {
   z-index: 1;
 }
 
+.home-hero + .section {
+  padding-top: 64px;
+}
+
 @media (max-width: 900px) {
   .home-hero::before {
     background-position: center 22%;
@@ -830,6 +834,41 @@ body::before {
       rgba(58, 43, 24, 0.32) 3px,
       transparent 12px
     ) top / 100% 12px no-repeat,
+
+    linear-gradient(
+      120deg,
+      rgba(82, 60, 28, 0.66) 0%,
+      rgba(190, 154, 84, 0.86) 18%,
+      rgba(255, 239, 190, 0.9) 29%,
+      rgba(142, 103, 46, 0.76) 43%,
+      rgba(74, 53, 25, 0.56) 56%,
+      rgba(212, 176, 98, 0.84) 74%,
+      rgba(255, 244, 205, 0.82) 84%,
+      rgba(126, 91, 40, 0.64) 100%
+    ) top 14px left 14px / calc(100% - 28px) 2px no-repeat,
+
+    linear-gradient(
+      120deg,
+      rgba(126, 91, 40, 0.52) 0%,
+      rgba(212, 176, 98, 0.78) 45%,
+      rgba(255, 244, 205, 0.72) 58%,
+      rgba(82, 60, 28, 0.58) 100%
+    ) bottom 14px left 14px / calc(100% - 28px) 2px no-repeat,
+
+    linear-gradient(
+      to bottom,
+      rgba(255, 244, 205, 0.76),
+      rgba(169, 136, 79, 0.74),
+      rgba(82, 60, 28, 0.58)
+    ) top 14px left 14px / 2px calc(100% - 28px) no-repeat,
+
+    linear-gradient(
+      to bottom,
+      rgba(82, 60, 28, 0.58),
+      rgba(169, 136, 79, 0.74),
+      rgba(255, 244, 205, 0.68)
+    ) top 14px right 14px / 2px calc(100% - 28px) no-repeat,
+
     radial-gradient(circle at 52% 48%, rgba(196, 168, 111, 0.16), transparent 38%),
     radial-gradient(circle at 68% 52%, rgba(245, 239, 227, 0.055), transparent 42%);
 }
@@ -839,7 +878,17 @@ body::before {
   z-index: 1;
 }
 
+@media (max-width: 1100px) {
+  .goal-section .container {
+    width: min(100% - 112px, var(--max-width));
+  }
+}
+
 @media (max-width: 900px) {
+  .goal-section .container {
+    width: min(100% - 56px, var(--max-width));
+  }
+
   .goal-section::before {
     background-position: left 0px center;
     background-size: 1280px auto;
