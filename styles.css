@@ -1333,3 +1333,65 @@ body::before {
     grid-template-columns: 1fr;
   }
 }
+
+/* Homepage featured build */
+
+.featured-build-section {
+  padding-top: 86px;
+  padding-bottom: 86px;
+}
+
+.featured-build-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 48px;
+  align-items: center;
+  padding: 42px;
+}
+
+.featured-build-panel h2 {
+  max-width: 620px;
+}
+
+.featured-build-panel > div > p:not(.eyebrow) {
+  max-width: 620px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.featured-build-details {
+  display: grid;
+  gap: 18px;
+}
+
+.featured-build-details div {
+  padding-top: 14px;
+  border-top: 1px solid rgba(169, 136, 79, 0.18);
+}
+
+.featured-build-details span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--brass);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.featured-build-details p {
+  color: var(--muted);
+}
+
+.featured-build-details .button {
+  justify-self: start;
+  margin-top: 8px;
+}
+
+@media (max-width: 920px) {
+  .featured-build-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
