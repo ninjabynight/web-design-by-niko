@@ -1395,3 +1395,42 @@ body::before {
   }
 }
 
+/* Contact next steps */
+
+.contact-next-card {
+  margin-top: 34px;
+  padding: 26px;
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius);
+  background: rgba(245, 239, 227, 0.44);
+  box-shadow: 0 14px 34px rgba(39, 35, 29, 0.06);
+}
+
+.contact-next-card h3 {
+  margin-bottom: 20px;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+}
+
+.contact-next-card div {
+  display: grid;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(169, 136, 79, 0.18);
+}
+
+.contact-next-card div + div {
+  margin-top: 16px;
+}
+
+.contact-next-card span {
+  color: var(--brass);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-next-card p {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
