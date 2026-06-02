@@ -899,8 +899,11 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 72% 44%, rgba(183, 145, 83, 0.18), transparent 28%),
-    radial-gradient(circle at 58% 34%, rgba(255, 248, 236, 0.055), transparent 42%);
+    linear-gradient(
+      90deg,
+      rgba(17, 17, 17, 0.08),
+      rgba(17, 17, 17, 0.18)
+    );
   pointer-events: none;
   z-index: 0;
 }
@@ -935,7 +938,11 @@ body::before {
 
   .home-hero::after {
     background:
-      radial-gradient(circle at 50% 30%, rgba(183, 145, 83, 0.12), transparent 32%);
+      linear-gradient(
+        180deg,
+        rgba(17, 17, 17, 0.02),
+        rgba(17, 17, 17, 0.16)
+      );
   }
 }
 
@@ -1010,10 +1017,7 @@ body::before {
       rgba(82, 60, 28, 0.58),
       rgba(169, 136, 79, 0.74),
       rgba(255, 244, 205, 0.68)
-    ) top 14px right 14px / 2px calc(100% - 28px) no-repeat,
-
-    radial-gradient(circle at 52% 48%, rgba(196, 168, 111, 0.16), transparent 38%),
-    radial-gradient(circle at 68% 52%, rgba(245, 239, 227, 0.055), transparent 42%);
+    ) top 14px right 14px / 2px calc(100% - 28px) no-repeat;
 }
 
 .goal-section .container {
