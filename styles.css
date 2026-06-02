@@ -1302,3 +1302,34 @@ body::before {
 .project-detail-list p {
   margin: 0;
 }
+
+/* Expandable services cards */
+
+.services-list .grid-4 {
+  align-items: start;
+}
+
+/* Services two-column expandable layout */
+
+.service-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+.service-column {
+  display: grid;
+  gap: 22px;
+  align-items: start;
+}
+
+.service-option-card {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .service-columns {
+    grid-template-columns: 1fr;
+  }
+}
