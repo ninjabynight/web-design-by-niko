@@ -48,7 +48,7 @@ document.querySelectorAll("details.project-card").forEach((card) => {
       details.style.paddingTop = "0px";
 
       requestAnimationFrame(() => {
-        details.style.maxHeight = `${details.scrollHeight}px`;
+        details.style.maxHeight = `${details.scrollHeight + 40}px`;
         details.style.opacity = "1";
         details.style.marginTop = "22px";
         details.style.paddingTop = "20px";

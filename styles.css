@@ -1231,7 +1231,7 @@ body::before {
 
 .project-card[open] .project-details {
   margin-top: 22px;
-  max-height: 520px;
+  max-height: 820px;
   padding-top: 20px;
   border-top: 1px solid rgba(169, 136, 79, 0.24);
   opacity: 1;
@@ -1275,4 +1275,30 @@ body::before {
 .project-card:focus-visible {
   outline: 2px solid rgba(196, 168, 111, 0.65);
   outline-offset: 4px;
+}
+
+/* Project detail notes */
+
+.project-detail-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.project-detail-list div {
+  padding-top: 14px;
+  border-top: 1px solid rgba(169, 136, 79, 0.18);
+}
+
+.project-detail-list h4 {
+  margin: 0 0 6px;
+  color: var(--brass);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-detail-list p {
+  margin: 0;
 }
