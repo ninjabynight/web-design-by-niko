@@ -1,17 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --charcoal: #111111;
-  --charcoal-soft: #1b1916;
-  --ink: #27231d;
+  --charcoal: #1c1915;
+  --charcoal-soft: #2a251f;
+  --ink: #2c261f;
   --bone: #f5efe3;
   --fossil: #e7dcc8;
-  --stone: #d3c4aa;
-  --sand: #b7a78b;
+  --stone: #cfc0a8;
+  --sand: #b6a78d;
   --brass: #a9884f;
   --brass-soft: #c4a86f;
-  --muted: #756b5d;
-  --line-light: rgba(39, 35, 29, 0.16);
+  --muted: #736858;
+  --line-light: rgba(44, 38, 31, 0.16);
   --line-dark: rgba(245, 239, 227, 0.16);
   --max-width: 1180px;
   --radius: 18px;
@@ -30,8 +30,8 @@ body {
   font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(169, 136, 79, 0.16), transparent 34rem),
-    linear-gradient(180deg, #f4eddf 0%, #e4d7c3 100%);
+    radial-gradient(circle at top left, rgba(169, 136, 79, 0.14), transparent 34rem),
+    linear-gradient(180deg, #eee5d6 0%, #d8cbb8 100%);
   line-height: 1.65;
 }
 
@@ -62,7 +62,7 @@ select {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(17, 17, 17, 0.9);
+  background: rgba(28, 25, 21, 0.92);
   border-bottom: 1px solid var(--line-dark);
   backdrop-filter: blur(18px);
 }
@@ -226,15 +226,15 @@ select {
 
 .section-dark {
   background:
-    radial-gradient(circle at top right, rgba(169, 136, 79, 0.12), transparent 28rem),
-    linear-gradient(135deg, #141312 0%, #242119 100%);
+    radial-gradient(circle at top right, rgba(169, 136, 79, 0.13), transparent 28rem),
+    linear-gradient(135deg, #211d18 0%, #332d25 100%);
   color: var(--bone);
 }
 
 .page-hero {
   background:
     radial-gradient(circle at 78% 16%, rgba(169, 136, 79, 0.2), transparent 28rem),
-    linear-gradient(135deg, #111111 0%, #22201b 100%);
+    linear-gradient(135deg, #1a1713 0%, #2f2a23 100%);
   color: var(--bone);
   padding: 92px 0 82px;
 }
@@ -568,7 +568,9 @@ p {
 /* Footer */
 
 .site-footer {
-  background: var(--charcoal);
+  background:
+    radial-gradient(circle at top right, rgba(169, 136, 79, 0.12), transparent 26rem),
+    linear-gradient(135deg, #1c1915 0%, #2d2821 100%);
   color: var(--bone);
   padding: 64px 0 36px;
 }
@@ -623,7 +625,7 @@ p {
     flex-direction: column;
     align-items: flex-start;
     padding: 28px 20px 34px;
-    background: rgba(17, 17, 17, 0.97);
+    background: rgba(28, 25, 21, 0.97);
     border-bottom: 1px solid var(--line-dark);
   }
 
@@ -852,7 +854,7 @@ p {
   }
 }
 
-/* Subtle Sharkbone texture layer */
+/* Subtle stone texture layer */
 
 body::before {
   content: "";
@@ -872,7 +874,7 @@ body::before {
   mix-blend-mode: multiply;
 }
 
-/* Homepage megalodon jawbone background */
+/* Homepage atmospheric background */
 
 .home-hero {
   position: relative;
@@ -884,12 +886,10 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("images/megalodon-jaw.png");
-  background-repeat: no-repeat;
-  background-position: right -6% center;
-  background-size: min(880px, 66vw);
-  opacity: 0.075;
-  filter: grayscale(100%) sepia(16%) brightness(0.82) contrast(0.94);
+  background:
+    radial-gradient(circle at 82% 22%, rgba(196, 168, 111, 0.16), transparent 24rem),
+    radial-gradient(circle at 68% 68%, rgba(245, 239, 227, 0.075), transparent 26rem),
+    linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.16) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -901,8 +901,8 @@ body::before {
   background:
     linear-gradient(
       90deg,
-      rgba(17, 17, 17, 0.08),
-      rgba(17, 17, 17, 0.18)
+      rgba(28, 25, 21, 0.02),
+      rgba(59, 52, 43, 0.18)
     );
   pointer-events: none;
   z-index: 0;
@@ -931,17 +931,17 @@ body::before {
 
 @media (max-width: 900px) {
   .home-hero::before {
-    background-position: center 22%;
-    background-size: min(560px, 96vw);
-    opacity: 0.075;
+    background:
+      radial-gradient(circle at 50% 24%, rgba(196, 168, 111, 0.14), transparent 22rem),
+      linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.16) 100%);
   }
 
   .home-hero::after {
     background:
       linear-gradient(
         180deg,
-        rgba(17, 17, 17, 0.02),
-        rgba(17, 17, 17, 0.16)
+        rgba(28, 25, 21, 0.02),
+        rgba(59, 52, 43, 0.16)
       );
   }
 }
@@ -957,17 +957,14 @@ body::before {
 
 .goal-section::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url("images/megalodon-skeleton.png");
-  background-repeat: no-repeat;
-  background-position: left 180px center;
-  background-size: 1360px auto;
-  opacity: 0.08;
-  filter: grayscale(100%) sepia(14%) brightness(0.98) contrast(1.18) drop-shadow(0 18px 34px rgba(0, 0, 0, 0.38));
-  transform: scaleX(-1);
+  background:
+    radial-gradient(circle at 18% 34%, rgba(196, 168, 111, 0.12), transparent 28rem),
+    radial-gradient(circle at 78% 62%, rgba(245, 239, 227, 0.05), transparent 24rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent 42%, rgba(0, 0, 0, 0.12));
 }
 
 .goal-section::after {
@@ -1037,10 +1034,9 @@ body::before {
   }
 
   .goal-section::before {
-    background-position: left 0px center;
-    background-size: 1280px auto;
-    opacity: 0.075;
-    transform: scaleX(-1);
+    background:
+      radial-gradient(circle at 50% 28%, rgba(196, 168, 111, 0.1), transparent 24rem),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(0, 0, 0, 0.12));
   }
 }
 
