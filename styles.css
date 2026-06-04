@@ -1422,7 +1422,7 @@ body::before {
   main {
     background-attachment: scroll;
     background-position: center 78px;
-    background-size: cover;
+    background-size: auto 100svh;
   }
 
   .page-hero {
