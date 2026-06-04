@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
 
-  <body>
+  <body class="contact-page">
     <div class="page-shell">
       <header class="site-header">
         <div class="header-inner">
@@ -43,7 +43,7 @@
           </div>
         </section>
 
-        <section class="section contact-section">
+        <section class="section contact-section footer-scene">
           <div class="container form-wrap">
             <div class="contact-intro">
               <p class="eyebrow">Project inquiry</p>
@@ -53,7 +53,7 @@
               </p>
 
               <p class="contact-email">
-                Email: <strong>Project email coming soon.</strong>
+                Email: <a href="mailto:webdesignbyniko@outlook.com"><strong>webdesignbyniko@outlook.com</strong></a>
               </p>
 
               <div class="contact-next-card">
@@ -76,15 +76,24 @@
               </div>
             </div>
 
-            <form class="contact-form contact-form-card" action="#" method="post">
+            <form class="contact-form contact-form-card" name="project-inquiry" action="/thank-you.html" method="post" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="project-inquiry" />
+
+              <p class="hidden-field">
+                <label>
+                  Don’t fill this out if you’re human:
+                  <input name="bot-field" />
+                </label>
+              </p>
+
               <div class="field-group">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" autocomplete="name" />
+                <label for="name">Name <span class="required-label">required</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
               </div>
 
               <div class="field-group">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" autocomplete="email" />
+                <label for="email">Email <span class="required-label">required</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
               </div>
 
               <div class="field-group">
@@ -98,8 +107,8 @@
               </div>
 
               <div class="field-group">
-                <label for="help">What kind of help do you need?</label>
-                <select id="help" name="help">
+                <label for="help">What kind of help do you need? <span class="required-label">required</span></label>
+                <select id="help" name="help" required>
                   <option value="">Choose one</option>
                   <option>New website</option>
                   <option>Website redesign</option>
@@ -110,8 +119,8 @@
               </div>
 
               <div class="field-group">
-                <label for="feel">What do you want the site to feel like?</label>
-                <textarea id="feel" name="feel"></textarea>
+                <label for="feel">What do you want the site to feel like? <span class="required-label">required</span></label>
+                <textarea id="feel" name="feel" required></textarea>
               </div>
 
               <div class="field-group">
@@ -132,9 +141,13 @@
               </div>
 
               <div class="field-group">
-                <label for="message">Anything else I should know?</label>
-                <textarea id="message" name="message"></textarea>
+                <label for="message">Anything else I should know? <span class="required-label">required</span></label>
+                <textarea id="message" name="message" required></textarea>
               </div>
+
+              <p class="form-note">
+                Required fields: name, email, project type, site feel, and message.
+              </p>
 
               <button class="button button-primary" type="submit">
                 Send Inquiry

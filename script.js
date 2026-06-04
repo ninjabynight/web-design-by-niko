@@ -60,3 +60,35 @@ document.querySelectorAll("details.project-card").forEach((card) => {
     }
   });
 });
+
+// Soft parallax for inner page hero images
+
+const parallaxHeroes = document.querySelectorAll(".page-hero:not(.home-hero)");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (parallaxHeroes.length && !prefersReducedMotion.matches) {
+  let ticking = false;
+
+  const updateHeroParallax = () => {
+    parallaxHeroes.forEach((hero) => {
+      const rect = hero.getBoundingClientRect();
+      const offset = Math.max(-90, Math.min(90, rect.top * -0.24));
+
+      hero.style.setProperty("--hero-parallax-y", `${offset}px`);
+    });
+
+    ticking = false;
+  };
+
+  const requestHeroParallax = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeroParallax);
+      ticking = true;
+    }
+  };
+
+  updateHeroParallax();
+
+  window.addEventListener("scroll", requestHeroParallax, { passive: true });
+  window.addEventListener("resize", requestHeroParallax);
+}
