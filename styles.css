@@ -1420,13 +1420,27 @@ body::before {
 
 @media (max-width: 1023px) {
   main {
+    background-color: #10160f;
+    background-image: none;
     background-attachment: scroll;
-    background-position: center 78px;
-    background-size: auto 100svh;
   }
 
   .page-hero {
     background-attachment: scroll;
+  }
+
+  .footer-scene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--page-footer-image) center center / cover no-repeat;
+  }
+
+  .site-footer::before {
+    position: absolute;
+    background: var(--page-footer-image) center center / cover no-repeat;
   }
 }
 
