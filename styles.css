@@ -1420,9 +1420,9 @@ body::before {
 
 @media (max-width: 1023px) {
   main {
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: auto 100vh;
+    background-attachment: scroll;
+    background-position: center 78px;
+    background-size: cover;
   }
 
   .page-hero {
@@ -1437,7 +1437,7 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #10160f;
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 
   .home-hero::before {
@@ -1476,7 +1476,7 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #10160f;
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 
   .home-hero::before {
