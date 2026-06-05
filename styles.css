@@ -52,7 +52,9 @@
   --page-footer-position: center 78px;
   --page-footer-size: cover;
 }
-
+.services-page .page-hero::before {
+  inset: 0;
+}
 .projects-page {
   --page-hero-image: url("images/approach-hero.png");
   --page-hero-position: center 46%;
