@@ -23,61 +23,85 @@
   --page-hero-size: cover;
   --page-hero-moon-glow: radial-gradient(circle at 32% 20%, transparent 0, transparent 18rem);
   --page-surface-rgb: 241, 230, 211;
-  --page-footer-image: url("images/frog-pond-footer.png");
+  --page-footer-image: none;
   --page-footer-position: center center;
   --page-footer-size: cover;
+  --page-footer-top-shade: 0.16;
+  --page-footer-mid-shade: 0.32;
+  --page-footer-bottom-shade: 0.68;
+  --page-footer-side-shade: 0.26;
+  --page-footer-side-fade: 0.18;
+  --page-bg-top: 780px;
+  --page-bg-bleed: clamp(160px, 16vw, 260px);
+  --body-parallax-y: 0px;
   --hero-fade-height: clamp(150px, 16vw, 230px);
 }
 
 .home-page {
-  --page-hero-image: url("images/cottage-hero.png");
-  --page-hero-position: center calc(50% + 64px);
+  --page-hero-image: url("images/home-hero.png");
+  --page-hero-position: 67% center;
   --page-hero-size: cover;
-  --page-footer-image: url("images/frog-pond-footer.png");
-  --page-footer-position: center 78px;
+  --page-footer-image: url("images/home-footer.png");
+  --page-footer-position: center center;
   --page-footer-size: cover;
+  --page-footer-top-shade: 0.18;
+  --page-footer-mid-shade: 0.34;
+  --page-footer-bottom-shade: 0.66;
 }
 
 .about-page {
   --page-hero-image: url("images/about-hero.png");
-  --page-hero-position: center 28%;
-  --page-hero-moon-glow: radial-gradient(circle at 31% 19%, rgba(207, 225, 255, 0.2), rgba(207, 225, 255, 0.08) 7rem, transparent 19rem);
+  --page-hero-position: 64% center;
+  --page-hero-moon-glow: radial-gradient(circle at 31% 19%, rgba(207, 225, 255, 0.16), rgba(207, 225, 255, 0.06) 7rem, transparent 19rem);
   --page-footer-image: url("images/about-footer.png");
-  --page-footer-position: center 78px;
+  --page-footer-position: center center;
   --page-footer-size: cover;
+  --page-footer-top-shade: 0.14;
+  --page-footer-mid-shade: 0.28;
+  --page-footer-bottom-shade: 0.58;
 }
 
 .services-page {
   --page-hero-image: url("images/services-hero.png");
-  --page-hero-position: center 18%;
-  --page-hero-moon-glow: radial-gradient(circle at 21% 27%, rgba(207, 225, 255, 0.22), rgba(207, 225, 255, 0.08) 7rem, transparent 18rem);
+  --page-hero-position: 70% center;
+  --page-hero-moon-glow: radial-gradient(circle at 21% 27%, rgba(207, 225, 255, 0.14), rgba(207, 225, 255, 0.05) 7rem, transparent 18rem);
   --page-footer-image: url("images/services-footer.png");
-  --page-footer-position: center 78px;
+  --page-footer-position: center center;
   --page-footer-size: cover;
+  --page-footer-top-shade: 0.18;
+  --page-footer-mid-shade: 0.34;
+  --page-footer-bottom-shade: 0.64;
 }
 .services-page .page-hero::before {
   inset: 0;
 }
 .projects-page {
-  --page-hero-image: url("images/approach-hero.png");
-  --page-hero-position: center 46%;
-  --page-footer-image: url("images/approach-footer.png");
-  --page-footer-position: center 78px;
+  --page-hero-image: url("images/projects-hero.png");
+  --page-hero-position: 72% center;
+  --page-hero-moon-glow: radial-gradient(circle at 66% 18%, rgba(207, 225, 255, 0.18), rgba(207, 225, 255, 0.06) 7rem, transparent 18rem);
+  --page-footer-image: url("images/projects-footer.png");
+  --page-footer-position: center center;
   --page-footer-size: cover;
+  --page-footer-top-shade: 0.08;
+  --page-footer-mid-shade: 0.22;
+  --page-footer-bottom-shade: 0.68;
 }
 
 .contact-page {
   --page-hero-image: url("images/contact-hero.png");
-  --page-hero-position: center 48%;
-  --page-hero-moon-glow: radial-gradient(circle at 66% 18%, rgba(207, 225, 255, 0.2), rgba(207, 225, 255, 0.08) 7rem, transparent 18rem);
+  --page-hero-position: 76% center;
+  --page-hero-moon-glow: radial-gradient(circle at 66% 18%, rgba(207, 225, 255, 0.14), rgba(207, 225, 255, 0.05) 7rem, transparent 18rem);
   --page-footer-image: url("images/contact-footer.png");
-  --page-footer-position: center 78px;
+  --page-footer-position: center center;
   --page-footer-size: cover;
+  --page-footer-top-shade: 0.18;
+  --page-footer-mid-shade: 0.32;
+  --page-footer-bottom-shade: 0.58;
 }
 
 .policy-page {
   --page-hero-image: none;
-  --page-footer-image: url("images/frog-pond-footer.png");
+  --page-footer-image: url("images/contact-footer.png");
   --page-footer-position: center center;
   --page-footer-size: cover;
 }
@@ -121,18 +145,69 @@ select {
 }
 
 .page-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: 100vh;
+  background: #10160f;
+}
+
+.page-shell::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--page-bg-top) - var(--page-bg-bleed));
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(8, 12, 8, var(--page-footer-top-shade)) 0%,
+      rgba(8, 12, 8, var(--page-footer-mid-shade)) 44%,
+      rgba(8, 12, 8, var(--page-footer-bottom-shade)) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(6, 9, 6, var(--page-footer-side-shade)) 0%,
+      rgba(6, 9, 6, 0.08) 48%,
+      rgba(6, 9, 6, var(--page-footer-side-fade)) 100%
+    ),
+    radial-gradient(circle at 24% 18%, rgba(204, 223, 255, 0.08), transparent 24rem),
+    radial-gradient(circle at 22% 28%, rgba(255, 248, 226, 0.04) 0 1px, transparent 1px),
+    radial-gradient(circle at 72% 70%, rgba(83, 103, 69, 0.06) 0 1px, transparent 1px),
+    var(--page-footer-image);
+  background-position:
+    center center,
+    center center,
+    center center,
+    center center,
+    center center,
+    var(--page-footer-position);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    36px 36px,
+    52px 52px,
+    var(--page-footer-size);
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
+  transform: translate3d(0, var(--body-parallax-y), 0) scale(1.035);
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.page-shell > main,
+.page-shell > .site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 main {
   position: relative;
   isolation: isolate;
-  background-color: #10160f;
-  background-image: var(--page-footer-image);
-  background-position: var(--page-footer-position);
-  background-size: var(--page-footer-size);
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  background: transparent;
 }
 
 /* Header */
@@ -1247,6 +1322,11 @@ main > .section:not(.footer-scene) .button-primary {
     color: rgba(245, 239, 227, 0.84);
   }
 
+  .page-hero p {
+    max-width: 34ch;
+    overflow-wrap: break-word;
+  }
+
   .page-hero:not(.home-hero) + .section {
     padding-top: 136px;
   }
@@ -1272,11 +1352,13 @@ main > .section:not(.footer-scene) .button-primary {
   }
 
   h1 {
-    font-size: clamp(3.15rem, 17vw, 5.2rem);
+    font-size: 3rem;
+    letter-spacing: -0.035em;
   }
 
   h2 {
-    font-size: clamp(2.3rem, 12vw, 3.8rem);
+    font-size: 2.55rem;
+    letter-spacing: -0.03em;
   }
 
   .grid-3,
@@ -1290,6 +1372,16 @@ main > .section:not(.footer-scene) .button-primary {
 
   .button {
     width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  h1 {
+    font-size: 2.72rem;
+  }
+
+  h2 {
+    font-size: 2.34rem;
   }
 }
 
@@ -1438,7 +1530,7 @@ body::before {
   }
 }
 
-/* Homepage cottage hero image */
+/* Homepage hero image */
 
 .home-hero {
   position: relative;
@@ -1681,7 +1773,7 @@ body::before {
   }
 }
 
-/* Homepage frog-pond night band */
+/* Homepage lower image band */
 
 .goal-section {
   position: relative;
@@ -2142,7 +2234,7 @@ body::before {
   font-size: 0.96rem;
 }
 
-/* Approach section: cottage threshold */
+/* Homepage first section */
 
 .home-hero + .section {
   position: relative;
@@ -2344,6 +2436,118 @@ body::before {
   }
 }
 
+/* Shared page-wide image system */
+
+.home-page {
+  --page-hero-image: url("images/home-hero.png");
+  --page-hero-position: 67% center;
+  --page-footer-image: url("images/home-footer.png");
+  --page-footer-position: center center;
+  --page-footer-size: cover;
+}
+
+.services-page {
+  --page-hero-image: url("images/services-hero.png");
+  --page-hero-position: 70% center;
+  --page-footer-image: url("images/services-footer.png");
+  --page-footer-position: center center;
+  --page-footer-size: cover;
+}
+
+.projects-page {
+  --page-hero-image: url("images/projects-hero.png");
+  --page-hero-position: 72% center;
+  --page-footer-image: url("images/projects-footer.png");
+  --page-footer-position: center center;
+  --page-footer-size: cover;
+}
+
+.about-page {
+  --page-hero-image: url("images/about-hero.png");
+  --page-hero-position: 64% center;
+  --page-footer-image: url("images/about-footer.png");
+  --page-footer-position: center center;
+  --page-footer-size: cover;
+}
+
+.contact-page {
+  --page-hero-image: url("images/contact-hero.png");
+  --page-hero-position: 76% center;
+  --page-footer-image: url("images/contact-footer.png");
+  --page-footer-position: center center;
+  --page-footer-size: cover;
+}
+
+main,
+.home-page main,
+.policy-page main,
+.home-page main > .section:not(.footer-scene),
+main > .section,
+main > .section:not(.footer-scene):not(.section-dark),
+.section-dark,
+.footer-scene,
+.site-footer {
+  background: transparent;
+  background-image: none;
+}
+
+main::before,
+.footer-scene::before,
+.home-page .footer-scene::before,
+.site-footer::before {
+  content: none !important;
+}
+
+@media (max-width: 900px) {
+  .home-page {
+    --page-hero-position: 66% center;
+  }
+
+  .services-page {
+    --page-hero-position: 74% center;
+  }
+
+  .projects-page {
+    --page-hero-position: 72% center;
+  }
+
+  .about-page {
+    --page-hero-position: 66% center;
+  }
+
+  .contact-page {
+    --page-hero-position: 77% center;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page {
+    --page-hero-position: 68% center;
+  }
+
+  .services-page {
+    --page-hero-position: 76% center;
+  }
+
+  .projects-page {
+    --page-hero-position: 74% center;
+  }
+
+  .about-page {
+    --page-hero-position: 68% center;
+  }
+
+  .contact-page {
+    --page-hero-position: 78% center;
+  }
+
+  .page-hero p,
+  .home-hero p {
+    max-width: min(100%, 32ch);
+    overflow-wrap: break-word;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -2369,5 +2573,12 @@ body::before {
 
   .site-footer::before {
     position: absolute !important;
+  }
+
+  .page-shell::before,
+  .page-hero::before,
+  .home-hero::before {
+    transform: none !important;
+    will-change: auto;
   }
 }
