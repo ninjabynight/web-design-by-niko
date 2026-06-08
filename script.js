@@ -61,9 +61,9 @@ document.querySelectorAll("details.project-card").forEach((card) => {
   });
 });
 
-// Soft parallax for inner page hero images
+// Soft parallax for page hero images
 
-const parallaxHeroes = document.querySelectorAll(".page-hero:not(.home-hero)");
+const parallaxHeroes = document.querySelectorAll(".page-hero");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 if (parallaxHeroes.length && !prefersReducedMotion.matches) {

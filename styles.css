@@ -30,6 +30,9 @@
 }
 
 .home-page {
+  --page-hero-image: url("images/cottage-hero.png");
+  --page-hero-position: center calc(50% + 64px);
+  --page-hero-size: cover;
   --page-footer-image: url("images/frog-pond-footer.png");
   --page-footer-position: center 78px;
   --page-footer-size: cover;
@@ -90,6 +93,7 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
@@ -128,7 +132,7 @@ main {
   background-position: var(--page-footer-position);
   background-size: var(--page-footer-size);
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 /* Header */
@@ -810,7 +814,7 @@ main > .section:not(.footer-scene) .button-primary {
     cover,
     var(--page-footer-size);
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .policy-hero {
@@ -1092,12 +1096,6 @@ main > .section:not(.footer-scene) .button-primary {
 .site-footer .footer-inner {
   position: relative;
   z-index: 1;
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  .site-footer::before {
-    position: fixed;
-  }
 }
 
 .footer-top {
@@ -1415,7 +1413,7 @@ main > .section:not(.footer-scene) .button-primary {
 
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 999;
   pointer-events: none;
@@ -1446,21 +1444,21 @@ body::before {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: calc(100vh - 78px);
+  min-height: calc(100svh - 78px);
   padding: clamp(96px, 10vw, 142px) 0 clamp(86px, 9vw, 128px);
-  background:
-    url("images/cottage-hero.png") center calc(50% + 64px) / cover no-repeat,
-    linear-gradient(135deg, #211a13 0%, #3b2e22 100%);
+  background: linear-gradient(135deg, #211a13 0%, #3b2e22 100%);
   color: var(--cream);
 }
 
 .home-hero::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -12%;
   z-index: 0;
   pointer-events: none;
   opacity: 1;
+  transform: translate3d(0, var(--hero-parallax-y, 0px), 0);
+  will-change: transform;
   background:
     linear-gradient(
       90deg,
@@ -1476,7 +1474,8 @@ body::before {
       rgba(20, 14, 9, 0.1) 100%
     ),
     radial-gradient(circle at 74% 44%, rgba(255, 186, 104, 0.1), transparent 24rem),
-    radial-gradient(circle at 18% 58%, rgba(83, 103, 69, 0.06), transparent 24rem);
+    radial-gradient(circle at 18% 58%, rgba(83, 103, 69, 0.06), transparent 24rem),
+    var(--page-hero-image) var(--page-hero-position) / var(--page-hero-size) no-repeat;
 }
 
 .home-hero::after {
@@ -1521,18 +1520,6 @@ body::before {
   margin-top: 36px;
 }
 
-@supports (background-attachment: fixed) {
-  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    .page-hero {
-      background-attachment: scroll, scroll, scroll, scroll, scroll;
-    }
-
-    .home-hero {
-      background-attachment: fixed, scroll;
-    }
-  }
-}
-
 .services-preview {
   position: relative;
   isolation: isolate;
@@ -1562,12 +1549,24 @@ body::before {
   padding-top: 0;
 }
 
+@media (max-width: 1180px) {
+  .home-page,
+  .about-page,
+  .services-page,
+  .projects-page,
+  .contact-page,
+  .policy-page {
+    --page-footer-position: center bottom;
+    --page-footer-size: max(920px, min(150vw, 1180px)) auto;
+  }
+}
+
 @media (max-width: 1023px) {
   main {
     background-color: #10160f;
     background-image: var(--page-footer-image);
-    background-position: center center;
-    background-size: cover;
+    background-position: var(--page-footer-position);
+    background-size: var(--page-footer-size);
     background-repeat: no-repeat;
     background-attachment: scroll;
   }
@@ -1582,23 +1581,23 @@ body::before {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: var(--page-footer-image) center center / cover no-repeat;
+    background: var(--page-footer-image) var(--page-footer-position) / var(--page-footer-size) no-repeat;
   }
 
   .site-footer::before {
     position: absolute;
-    background: var(--page-footer-image) center center / cover no-repeat;
+    background: var(--page-footer-image) var(--page-footer-position) / var(--page-footer-size) no-repeat;
   }
 }
 
 @media (max-width: 900px) {
+  .home-page {
+    --page-hero-position: 58% 54%;
+  }
+
   .home-hero {
-    min-height: calc(100vh - 78px);
-    background-position: 58% 54%;
-    background-size: cover;
-    background-repeat: no-repeat;
+    min-height: calc(100svh - 78px);
     background-color: #10160f;
-    background-attachment: scroll;
   }
 
   .home-hero::before {
@@ -1616,7 +1615,8 @@ body::before {
         rgba(20, 14, 9, 0.02) 42%,
         rgba(20, 14, 9, 0.18) 100%
       ),
-      radial-gradient(circle at 62% 42%, rgba(255, 190, 112, 0.14), transparent 22rem);
+      radial-gradient(circle at 62% 42%, rgba(255, 190, 112, 0.14), transparent 22rem),
+      var(--page-hero-image) var(--page-hero-position) / var(--page-hero-size) no-repeat;
   }
 
   .home-hero .page-hero-inner {
@@ -1630,14 +1630,20 @@ body::before {
 }
 
 @media (max-width: 640px) {
+  .home-page,
+  .about-page,
+  .services-page,
+  .projects-page,
+  .contact-page,
+  .policy-page {
+    --page-footer-position: center bottom;
+    --page-footer-size: max(620px, 178vw) auto;
+  }
+
   .home-hero {
-    min-height: calc(100vh - 78px);
+    min-height: calc(100svh - 78px);
     padding: 82px 0 96px;
-    background-position: 58% 54%;
-    background-size: cover;
-    background-repeat: no-repeat;
     background-color: #10160f;
-    background-attachment: scroll;
   }
 
   .home-hero::before {
@@ -1654,7 +1660,8 @@ body::before {
         rgba(20, 14, 9, 0.22) 0%,
         rgba(20, 14, 9, 0.04) 36%,
         rgba(20, 14, 9, 0.28) 100%
-      );
+      ),
+      var(--page-hero-image) var(--page-hero-position) / var(--page-hero-size) no-repeat;
   }
 
   .home-hero .page-hero-inner {
@@ -2289,6 +2296,51 @@ body::before {
 @media (max-width: 700px) {
   .home-hero + .section .approach-card {
     padding: 30px 24px 28px;
+  }
+}
+
+.home-page main {
+  background-color: #0d140d;
+  background-image: none;
+}
+
+.home-page main > .section:not(.footer-scene) {
+  background:
+    radial-gradient(ellipse at 18% 18%, rgba(192, 170, 120, 0.08), transparent 26rem),
+    radial-gradient(ellipse at 86% 72%, rgba(83, 103, 69, 0.16), transparent 28rem),
+    radial-gradient(ellipse at 22% 78%, rgba(245, 239, 227, 0.035), transparent 18rem),
+    repeating-linear-gradient(
+      118deg,
+      rgba(245, 239, 227, 0.022) 0 1px,
+      transparent 1px 24px
+    ),
+    linear-gradient(180deg, #10170f 0%, #111a10 48%, #0c130c 100%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    34px 34px,
+    100% 100%;
+}
+
+.home-page .footer-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--page-footer-image) var(--page-footer-position) / var(--page-footer-size) no-repeat;
+  transform: translateZ(0);
+}
+
+@media (max-width: 700px) {
+  .closing-panel {
+    gap: 24px;
+    padding: 28px 22px;
+  }
+
+  .closing-actions {
+    width: 100%;
   }
 }
 
