@@ -3,3 +3,6 @@
 
 # Local Netlify folder
 .netlify
+
+# Root-level scratch patches
+/*.patch

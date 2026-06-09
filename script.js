@@ -72,83 +72,195 @@ document.querySelectorAll("details.project-card").forEach((card) => {
   });
 });
 
-// Shared image parallax
+// Shared hero and background parallax
 
 const pageShell = document.querySelector(".page-shell");
 const pageHero = document.querySelector("main > .page-hero");
-const parallaxHeroes = document.querySelectorAll(".page-hero");
+const siteHeader = document.querySelector(".site-header");
+const siteFooter = document.querySelector(".site-footer");
+const parallaxHeroes = Array.from(document.querySelectorAll(".page-hero"));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const clamp = (min, value, max) => Math.min(max, Math.max(min, value));
 
+const createParallaxLayer = (parent, className) => {
+  const existingLayer = Array.from(parent.children).find((child) => child.classList.contains(className));
+
+  if (existingLayer) return existingLayer;
+
+  const layer = document.createElement("div");
+  layer.className = className;
+  layer.setAttribute("aria-hidden", "true");
+  parent.insertBefore(layer, parent.firstElementChild);
+
+  return layer;
+};
+
+const setTranslateY = (element, y, scale = 1) => {
+  if (!element) return;
+
+  const scaleValue = scale === 1 ? "" : ` scale(${scale})`;
+
+  element.style.transform = `translate3d(0, ${y.toFixed(3)}px, 0)${scaleValue}`;
+};
+
+const parallaxBody = pageShell
+  ? {
+      layer: createParallaxLayer(pageShell, "page-shell-bg"),
+      y: 0,
+      targetY: 0,
+    }
+  : null;
+
+if (pageShell && parallaxBody) {
+  pageShell.classList.add("has-parallax-bg");
+}
+
+const parallaxEntries = parallaxHeroes.map((hero) => {
+  const layer = createParallaxLayer(hero, "page-hero-backdrop");
+
+  hero.classList.add("has-parallax-layer");
+
+  return {
+    hero,
+    layer,
+    content: hero.querySelector(".page-hero-inner"),
+    imageY: 0,
+    targetImageY: 0,
+    textY: 0,
+    targetTextY: 0,
+  };
+});
+
 const syncPageBackgroundStart = () => {
   if (!pageShell || !pageHero) return;
 
-  const header = document.querySelector(".site-header");
-  const headerHeight = header ? header.offsetHeight : 0;
+  const headerHeight = siteHeader ? siteHeader.offsetHeight : 0;
+  const footerHeight = siteFooter ? siteFooter.offsetHeight : 0;
 
   pageShell.style.setProperty("--page-bg-top", `${headerHeight + pageHero.offsetHeight}px`);
+  pageShell.style.setProperty("--page-bg-bottom", `${footerHeight}px`);
 };
 
 const resetParallax = () => {
-  parallaxHeroes.forEach((hero) => {
-    hero.style.setProperty("--hero-parallax-y", "0px");
+  parallaxEntries.forEach((entry) => {
+    entry.imageY = 0;
+    entry.targetImageY = 0;
+    entry.textY = 0;
+    entry.targetTextY = 0;
+    setTranslateY(entry.layer, 0);
+    setTranslateY(entry.content, 0);
   });
 
-  if (pageShell) {
-    pageShell.style.setProperty("--body-parallax-y", "0px");
+  if (parallaxBody) {
+    parallaxBody.y = 0;
+    parallaxBody.targetY = 0;
+    setTranslateY(parallaxBody.layer, 0, 1.035);
+  }
+};
+
+const setParallaxTargets = () => {
+  const isCompactViewport = window.innerWidth <= 640;
+  const heroImageMax = isCompactViewport ? 72 : 104;
+  const heroImageMin = isCompactViewport ? -34 : -46;
+  const heroTextMin = isCompactViewport ? -18 : -30;
+  const bodyMax = isCompactViewport ? 10 : 16;
+  const headerHeight = siteHeader ? siteHeader.offsetHeight : 0;
+
+  parallaxEntries.forEach((entry) => {
+    const heroStart = Math.max(0, entry.hero.offsetTop - headerHeight);
+    const heroScroll = window.scrollY - heroStart;
+
+    entry.targetImageY = clamp(heroImageMin, heroScroll * 0.2, heroImageMax);
+    entry.targetTextY = clamp(heroTextMin, heroScroll * -0.072, 0);
+  });
+
+  if (parallaxBody) {
+    parallaxBody.targetY = clamp(0, window.scrollY * 0.006, bodyMax);
   }
 };
 
 syncPageBackgroundStart();
 
-let parallaxTicking = false;
+let parallaxFrame = 0;
 
-const updateParallax = () => {
+const updateParallax = (snap = false) => {
+  parallaxFrame = 0;
+
   if (prefersReducedMotion.matches) {
     resetParallax();
-    parallaxTicking = false;
     return;
   }
 
-  parallaxHeroes.forEach((hero) => {
-    const rect = hero.getBoundingClientRect();
-    const offset = clamp(-52, rect.top * -0.14, 72);
+  setParallaxTargets();
 
-    hero.style.setProperty("--hero-parallax-y", `${offset}px`);
+  const ease = 0.12;
+  let shouldContinue = false;
+
+  parallaxEntries.forEach((entry) => {
+    entry.imageY = snap ? entry.targetImageY : entry.imageY + (entry.targetImageY - entry.imageY) * ease;
+    entry.textY = snap ? entry.targetTextY : entry.textY + (entry.targetTextY - entry.textY) * ease;
+
+    setTranslateY(entry.layer, entry.imageY);
+    setTranslateY(entry.content, entry.textY);
+
+    shouldContinue =
+      shouldContinue ||
+      Math.abs(entry.targetImageY - entry.imageY) > 0.04 ||
+      Math.abs(entry.targetTextY - entry.textY) > 0.04;
   });
 
-  if (pageShell) {
-    const bodyOffset = clamp(0, window.scrollY * 0.045, 86);
+  if (parallaxBody) {
+    parallaxBody.y = snap ? parallaxBody.targetY : parallaxBody.y + (parallaxBody.targetY - parallaxBody.y) * 0.08;
+    setTranslateY(parallaxBody.layer, parallaxBody.y, 1.035);
 
-    pageShell.style.setProperty("--body-parallax-y", `${bodyOffset}px`);
+    shouldContinue = shouldContinue || Math.abs(parallaxBody.targetY - parallaxBody.y) > 0.04;
   }
 
-  parallaxTicking = false;
+  if (shouldContinue) {
+    parallaxFrame = window.requestAnimationFrame(() => updateParallax());
+  }
 };
 
-const requestParallax = () => {
-  if (!parallaxTicking) {
-    window.requestAnimationFrame(updateParallax);
-    parallaxTicking = true;
+const requestParallax = (snap = false) => {
+  if (snap) {
+    if (parallaxFrame) {
+      window.cancelAnimationFrame(parallaxFrame);
+      parallaxFrame = 0;
+    }
+
+    updateParallax(true);
+    return;
+  }
+
+  if (!parallaxFrame) {
+    parallaxFrame = window.requestAnimationFrame(() => updateParallax());
   }
 };
 
 resetParallax();
+requestParallax(true);
+
+window.addEventListener("scroll", () => requestParallax(), { passive: true });
 
 window.addEventListener("resize", () => {
   syncPageBackgroundStart();
-  resetParallax();
+  requestParallax(true);
+});
+
+window.addEventListener("load", () => {
+  syncPageBackgroundStart();
+  requestParallax(true);
 });
 
 if (typeof prefersReducedMotion.addEventListener === "function") {
   prefersReducedMotion.addEventListener("change", () => {
     syncPageBackgroundStart();
-    requestParallax();
+    requestParallax(true);
   });
 } else if (typeof prefersReducedMotion.addListener === "function") {
   prefersReducedMotion.addListener(() => {
     syncPageBackgroundStart();
-    requestParallax();
+    requestParallax(true);
   });
 }

@@ -23,8 +23,8 @@
   --page-footer-side-shade: 0.26;
   --page-footer-side-fade: 0.18;
   --page-bg-top: 780px;
+  --page-bg-bottom: 0px;
   --page-bg-bleed: clamp(160px, 16vw, 260px);
-  --body-parallax-y: 0px;
 }
 
 .home-page {
@@ -33,10 +33,10 @@
   --page-hero-size: cover;
   --page-footer-image: url("images/home-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: auto 100%;
   --page-footer-top-shade: 0.18;
-  --page-footer-mid-shade: 0.34;
-  --page-footer-bottom-shade: 0.66;
+  --page-footer-mid-shade: 0.26;
+  --page-footer-bottom-shade: 0.48;
 }
 
 .about-page {
@@ -62,13 +62,15 @@
   --page-footer-mid-shade: 0.34;
   --page-footer-bottom-shade: 0.64;
 }
-.services-page .page-hero::before {
+.services-page .page-hero::before,
+.services-page .page-hero-backdrop {
   inset: 0;
 }
 .services-page .page-hero h1 {
   max-width: 700px;
 }
-.about-page .page-hero::before {
+.about-page .page-hero::before,
+.about-page .page-hero-backdrop {
   inset: 0;
 }
 .about-page .page-hero h1 {
@@ -124,6 +126,7 @@
 }
 
 html {
+  background: #10160f;
   scroll-behavior: smooth;
 }
 
@@ -163,13 +166,14 @@ select {
   background: #10160f;
 }
 
-.page-shell::before {
+.page-shell::before,
+.page-shell-bg {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   top: calc(var(--page-bg-top) - var(--page-bg-bleed));
-  bottom: 0;
+  bottom: var(--page-bg-bottom);
   z-index: 0;
   pointer-events: none;
   background-image:
@@ -204,9 +208,15 @@ select {
     52px 52px,
     var(--page-footer-size);
   background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
-  transform: translate3d(0, var(--body-parallax-y), 0) scale(1.035);
+  transform: translate3d(0, 0, 0) scale(1.035);
   transform-origin: center top;
+  backface-visibility: hidden;
+  contain: paint;
   will-change: transform;
+}
+
+.page-shell.has-parallax-bg::before {
+  content: none;
 }
 
 .page-shell > main,
@@ -408,7 +418,8 @@ main > .section:not(.footer-scene):not(.section-dark) {
   padding: 110px 0 clamp(150px, 14vw, 220px);
 }
 
-.page-hero::before {
+.page-hero::before,
+.page-hero-backdrop {
   content: "";
   position: absolute;
   inset: -14%;
@@ -437,8 +448,14 @@ main > .section:not(.footer-scene):not(.section-dark) {
     38px 38px,
     52px 52px,
     var(--page-hero-size);
-  transform: translate3d(0, var(--hero-parallax-y, 0px), 0);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  contain: paint;
   will-change: transform;
+}
+
+.page-hero.has-parallax-layer::before {
+  content: none;
 }
 
 .page-hero::after {
@@ -457,6 +474,8 @@ main > .section:not(.footer-scene):not(.section-dark) {
   max-width: 930px;
   position: relative;
   z-index: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .page-hero:not(.home-hero) h1,
@@ -902,7 +921,8 @@ main > .section:not(.footer-scene) .button-primary {
   background: transparent;
 }
 
-.policy-hero::before {
+.policy-hero::before,
+.policy-hero .page-hero-backdrop {
   background:
     linear-gradient(
       90deg,
@@ -1294,7 +1314,8 @@ main > .section:not(.footer-scene) .button-primary {
     align-items: center;
   }
 
-  .page-hero:not(.home-hero)::before {
+  .page-hero:not(.home-hero)::before,
+  .page-hero:not(.home-hero) .page-hero-backdrop {
     inset: -12%;
     opacity: 1;
     background:
@@ -1520,14 +1541,15 @@ body::before {
   color: var(--cream);
 }
 
-.home-hero::before {
+.home-hero::before,
+.home-hero .page-hero-backdrop {
   content: "";
   position: absolute;
   inset: -12%;
   z-index: 0;
   pointer-events: none;
   opacity: 1;
-  transform: translate3d(0, var(--hero-parallax-y, 0px), 0);
+  transform: translate3d(0, 0, 0);
   will-change: transform;
   background:
     linear-gradient(
@@ -1645,7 +1667,8 @@ body::before {
     background-color: #10160f;
   }
 
-  .home-hero::before {
+  .home-hero::before,
+  .home-hero .page-hero-backdrop {
     background:
       radial-gradient(circle at 24% 16%, rgba(207, 225, 255, 0.14), rgba(207, 225, 255, 0.05) 7rem, transparent 18rem),
       linear-gradient(
@@ -1682,7 +1705,8 @@ body::before {
     background-color: #10160f;
   }
 
-  .home-hero::before {
+  .home-hero::before,
+  .home-hero .page-hero-backdrop {
     background:
       radial-gradient(circle at 28% 14%, rgba(207, 225, 255, 0.12), rgba(207, 225, 255, 0.04) 6rem, transparent 16rem),
       linear-gradient(
@@ -2319,7 +2343,7 @@ main > .home-hero + .section .approach-card::before {
   --page-hero-position: 67% center;
   --page-footer-image: url("images/home-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: auto 100%;
 }
 
 .services-page {
@@ -2382,6 +2406,23 @@ main::before,
   content: none !important;
 }
 
+.home-page .closing-section.footer-scene > .container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.home-page .closing-section .closing-panel {
+  width: min(100%, 760px);
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.home-page .closing-section .closing-actions {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  justify-items: start;
+}
+
 @media (max-width: 900px) {
   .home-page {
     --page-hero-position: 66% center;
@@ -2441,35 +2482,28 @@ main::before,
 }
 
   
-.contact-page .page-shell::before {
-  bottom: clamp(320px, 40vh, 440px);
+.contact-page .page-shell::before,
+.contact-page .page-shell-bg {
+  bottom: var(--page-bg-bottom);
 }
 
+.site-footer,
 .contact-page .site-footer {
   background-color: #0d120c;
   background-image:
-    linear-gradient(
-      180deg,
-      rgba(8, 12, 8, 0.42) 0%,
-      rgba(8, 12, 8, 0.68) 46%,
-      rgba(8, 12, 8, 0.9) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(6, 9, 6, 0.68) 0%,
-      rgba(6, 9, 6, 0.42) 48%,
-      rgba(6, 9, 6, 0.34) 100%
-    ),
-    var(--page-footer-image);
-  background-position:
-    center center,
-    center center,
-    25% bottom;
-  background-size:
-    100% 100%,
-    100% 100%,
-    100% auto;
+    radial-gradient(circle at 18% 0%, rgba(196, 168, 111, 0.08), transparent 24rem),
+    radial-gradient(circle at 84% 20%, rgba(83, 103, 69, 0.11), transparent 28rem),
+    linear-gradient(180deg, #10170f 0%, #0b110b 100%);
+  background-position: center center;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
+  border-top: 1px solid rgba(245, 239, 227, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 226, 0.04);
+  margin-top: 0;
+}
+
+.site-footer::after {
+  content: none;
 }
 
 /* Refined interactive polish */
@@ -2642,8 +2676,11 @@ main::before,
   }
 
   .page-shell::before,
+  .page-shell-bg,
   .page-hero::before,
-  .home-hero::before {
+  .home-hero::before,
+  .page-hero-backdrop,
+  .page-hero-inner {
     transform: none !important;
     will-change: auto;
   }
