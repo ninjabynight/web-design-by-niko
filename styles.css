@@ -202,8 +202,7 @@ select {
   background: #10160f;
 }
 
-.page-shell::before,
-.page-shell-bg {
+.page-shell::before {
   content: "";
   position: absolute;
   left: 0;
@@ -248,11 +247,6 @@ select {
   transform-origin: center top;
   backface-visibility: hidden;
   contain: paint;
-  will-change: transform;
-}
-
-.page-shell.has-parallax-bg::before {
-  content: none;
 }
 
 .page-shell > main,
@@ -1671,15 +1665,6 @@ body::before {
     background-attachment: scroll;
   }
 
-  .footer-scene::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: var(--page-footer-image) var(--page-footer-position) / var(--page-footer-size) no-repeat;
-  }
-
   .site-footer::before {
     position: absolute;
     background: var(--page-footer-image) var(--page-footer-position) / var(--page-footer-size) no-repeat;
@@ -2337,16 +2322,6 @@ main > .home-hero + .section .approach-card::before {
     100% 100%;
 }
 
-.home-page .footer-scene::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: var(--page-footer-image) var(--page-footer-position) / var(--page-footer-size) no-repeat;
-  transform: translateZ(0);
-}
-
 @media (max-width: 700px) {
   .closing-panel {
     gap: 24px;
@@ -2373,7 +2348,6 @@ main > .section:not(.footer-scene):not(.section-dark),
 
 main::before,
 .footer-scene::before,
-.home-page .footer-scene::before,
 .site-footer::before {
   content: none !important;
 }
@@ -2403,8 +2377,7 @@ main::before,
   }
 }
 
-.contact-page .page-shell::before,
-.contact-page .page-shell-bg {
+.contact-page .page-shell::before {
   bottom: var(--page-bg-bottom);
 }
 
@@ -2597,7 +2570,6 @@ main::before,
   }
 
   .page-shell::before,
-  .page-shell-bg,
   .page-hero::before,
   .home-hero::before,
   .page-hero-backdrop,

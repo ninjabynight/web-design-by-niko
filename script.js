@@ -104,18 +104,6 @@ const setTranslateY = (element, y, scale = 1) => {
   element.style.transform = `translate3d(0, ${y.toFixed(3)}px, 0)${scaleValue}`;
 };
 
-const parallaxBody = pageShell
-  ? {
-      layer: createParallaxLayer(pageShell, "page-shell-bg"),
-      y: 0,
-      targetY: 0,
-    }
-  : null;
-
-if (pageShell && parallaxBody) {
-  pageShell.classList.add("has-parallax-bg");
-}
-
 const parallaxEntries = parallaxHeroes.map((hero) => {
   const layer = createParallaxLayer(hero, "page-hero-backdrop");
 
@@ -152,11 +140,6 @@ const resetParallax = () => {
     setTranslateY(entry.content, 0);
   });
 
-  if (parallaxBody) {
-    parallaxBody.y = 0;
-    parallaxBody.targetY = 0;
-    setTranslateY(parallaxBody.layer, 0, 1.035);
-  }
 };
 
 const setParallaxTargets = () => {
@@ -164,7 +147,6 @@ const setParallaxTargets = () => {
   const heroImageMax = isCompactViewport ? 72 : 104;
   const heroImageMin = isCompactViewport ? -34 : -46;
   const heroTextMin = isCompactViewport ? -18 : -30;
-  const bodyMax = isCompactViewport ? 10 : 16;
   const headerHeight = siteHeader ? siteHeader.offsetHeight : 0;
 
   parallaxEntries.forEach((entry) => {
@@ -174,10 +156,6 @@ const setParallaxTargets = () => {
     entry.targetImageY = clamp(heroImageMin, heroScroll * 0.2, heroImageMax);
     entry.targetTextY = clamp(heroTextMin, heroScroll * -0.072, 0);
   });
-
-  if (parallaxBody) {
-    parallaxBody.targetY = clamp(0, window.scrollY * 0.006, bodyMax);
-  }
 };
 
 syncPageBackgroundStart();
@@ -209,13 +187,6 @@ const updateParallax = (snap = false) => {
       Math.abs(entry.targetImageY - entry.imageY) > 0.04 ||
       Math.abs(entry.targetTextY - entry.textY) > 0.04;
   });
-
-  if (parallaxBody) {
-    parallaxBody.y = snap ? parallaxBody.targetY : parallaxBody.y + (parallaxBody.targetY - parallaxBody.y) * 0.08;
-    setTranslateY(parallaxBody.layer, parallaxBody.y, 1.035);
-
-    shouldContinue = shouldContinue || Math.abs(parallaxBody.targetY - parallaxBody.y) > 0.04;
-  }
 
   if (shouldContinue) {
     parallaxFrame = window.requestAnimationFrame(() => updateParallax());
