@@ -34,8 +34,8 @@
   --page-hero-position: 67% center;
   --page-hero-size: cover;
   --page-footer-image: url("images/home-footer.png");
-  --page-footer-position: center center;
-  --page-footer-size: auto 100%;
+  --page-footer-position: center 62%;
+  --page-footer-size: min(1196px, 99vw) auto;
   --page-footer-top-shade: 0.18;
   --page-footer-mid-shade: 0.26;
   --page-footer-bottom-shade: 0.48;
