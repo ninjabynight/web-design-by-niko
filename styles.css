@@ -51,11 +51,11 @@
 
 .about-page {
   --page-hero-image: url("images/about-hero.png");
-  --page-hero-position: 64% center;
+  --page-hero-position: 80% center;
   --page-hero-moon-glow: radial-gradient(circle at 31% 19%, rgba(207, 225, 255, 0.16), rgba(207, 225, 255, 0.06) 7rem, transparent 19rem);
   --page-footer-image: url("images/about-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: 100% auto;
   --page-footer-top-shade: 0.14;
   --page-footer-mid-shade: 0.28;
   --page-footer-bottom-shade: 0.58;
@@ -63,11 +63,11 @@
 
 .services-page {
   --page-hero-image: url("images/services-hero.png");
-  --page-hero-position: 70% center;
+  --page-hero-position: 95% 42%;
   --page-hero-moon-glow: radial-gradient(circle at 21% 27%, rgba(207, 225, 255, 0.14), rgba(207, 225, 255, 0.05) 7rem, transparent 18rem);
   --page-footer-image: url("images/services-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: 100% auto;
   --page-footer-top-shade: 0.18;
   --page-footer-mid-shade: 0.34;
   --page-footer-bottom-shade: 0.64;
@@ -75,13 +75,22 @@
 .services-page .page-hero::before {
   inset: 0;
 }
+.services-page .page-hero h1 {
+  max-width: 700px;
+}
+.about-page .page-hero::before {
+  inset: 0;
+}
+.about-page .page-hero h1 {
+  max-width: 700px;
+}
 .projects-page {
   --page-hero-image: url("images/projects-hero.png");
   --page-hero-position: 72% center;
   --page-hero-moon-glow: radial-gradient(circle at 66% 18%, rgba(207, 225, 255, 0.18), rgba(207, 225, 255, 0.06) 7rem, transparent 18rem);
   --page-footer-image: url("images/projects-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: 100% auto;
   --page-footer-top-shade: 0.08;
   --page-footer-mid-shade: 0.22;
   --page-footer-bottom-shade: 0.68;
@@ -92,11 +101,23 @@
   --page-hero-position: 76% center;
   --page-hero-moon-glow: radial-gradient(circle at 66% 18%, rgba(207, 225, 255, 0.14), rgba(207, 225, 255, 0.05) 7rem, transparent 18rem);
   --page-footer-image: url("images/contact-footer.png");
-  --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-position: 35% 100%;
+  --page-footer-size: 100% auto;
   --page-footer-top-shade: 0.18;
   --page-footer-mid-shade: 0.32;
   --page-footer-bottom-shade: 0.58;
+}
+
+.thank-you-page {
+  --page-hero-image: url("images/thank-you-hero.png");
+  --page-hero-position: center center;
+  --page-hero-moon-glow: radial-gradient(circle at 66% 18%, rgba(207, 225, 255, 0.14), rgba(207, 225, 255, 0.05) 7rem, transparent 18rem);
+  --page-footer-image: url("images/thank-you-hero.png");
+  --page-footer-position: center 82%;
+  --page-footer-size: cover;
+  --page-footer-top-shade: 0.28;
+  --page-footer-mid-shade: 0.42;
+  --page-footer-bottom-shade: 0.72;
 }
 
 .policy-page {
@@ -1523,10 +1544,13 @@ body::before {
 
 @media (max-width: 640px) {
   .about-page,
-  .services-page,
   .projects-page,
   .contact-page {
     --page-hero-position: center 58%;
+  }
+
+  .services-page {
+    --page-hero-position: 95% 42%;
   }
 }
 
@@ -1647,9 +1671,20 @@ body::before {
   .services-page,
   .projects-page,
   .contact-page,
+  .thank-you-page,
   .policy-page {
     --page-footer-position: center bottom;
     --page-footer-size: max(920px, min(150vw, 1180px)) auto;
+  }
+
+  .thank-you-page {
+    --page-footer-position: center 82%;
+    --page-footer-size: cover;
+  }
+
+  .contact-page {
+    --page-footer-position: center 100%;
+    --page-footer-size: 100% auto;
   }
 }
 
@@ -1727,9 +1762,20 @@ body::before {
   .services-page,
   .projects-page,
   .contact-page,
+  .thank-you-page,
   .policy-page {
     --page-footer-position: center bottom;
     --page-footer-size: max(620px, 178vw) auto;
+  }
+
+  .thank-you-page {
+    --page-footer-position: center 82%;
+    --page-footer-size: cover;
+  }
+
+  .contact-page {
+    --page-footer-position: center 100%;
+    --page-footer-size: 100% auto;
   }
 
   .home-hero {
@@ -2436,8 +2482,6 @@ body::before {
   }
 }
 
-/* Shared page-wide image system */
-
 .home-page {
   --page-hero-image: url("images/home-hero.png");
   --page-hero-position: 67% center;
@@ -2448,10 +2492,10 @@ body::before {
 
 .services-page {
   --page-hero-image: url("images/services-hero.png");
-  --page-hero-position: 70% center;
+  --page-hero-position: 95% 42%;
   --page-footer-image: url("images/services-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: 100% auto;
 }
 
 .projects-page {
@@ -2459,22 +2503,30 @@ body::before {
   --page-hero-position: 72% center;
   --page-footer-image: url("images/projects-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: 100% auto;
 }
 
 .about-page {
   --page-hero-image: url("images/about-hero.png");
-  --page-hero-position: 64% center;
+  --page-hero-position: 80% center;
   --page-footer-image: url("images/about-footer.png");
   --page-footer-position: center center;
-  --page-footer-size: cover;
+  --page-footer-size: 100% auto;
 }
 
 .contact-page {
   --page-hero-image: url("images/contact-hero.png");
   --page-hero-position: 76% center;
   --page-footer-image: url("images/contact-footer.png");
-  --page-footer-position: center center;
+  --page-footer-position: 72% 100%;
+  --page-footer-size: 112% auto;
+}
+
+.thank-you-page {
+  --page-hero-image: url("images/thank-you-hero.png");
+  --page-hero-position: center center;
+  --page-footer-image: url("images/thank-you-hero.png");
+  --page-footer-position: center 82%;
   --page-footer-size: cover;
 }
 
@@ -2504,7 +2556,7 @@ main::before,
   }
 
   .services-page {
-    --page-hero-position: 74% center;
+    --page-hero-position: 95% 42%;
   }
 
   .projects-page {
@@ -2512,11 +2564,15 @@ main::before,
   }
 
   .about-page {
-    --page-hero-position: 66% center;
+    --page-hero-position: 80% center;
   }
 
   .contact-page {
     --page-hero-position: 77% center;
+  }
+
+  .thank-you-page {
+    --page-hero-position: center center;
   }
 }
 
@@ -2526,7 +2582,7 @@ main::before,
   }
 
   .services-page {
-    --page-hero-position: 76% center;
+    --page-hero-position: 95% 42%;
   }
 
   .projects-page {
@@ -2534,11 +2590,15 @@ main::before,
   }
 
   .about-page {
-    --page-hero-position: 68% center;
+    --page-hero-position: 80% center;
   }
 
   .contact-page {
     --page-hero-position: 78% center;
+  }
+
+  .thank-you-page {
+    --page-hero-position: center center;
   }
 
   .page-hero p,
@@ -2546,6 +2606,38 @@ main::before,
     max-width: min(100%, 32ch);
     overflow-wrap: break-word;
   }
+}
+
+  
+.contact-page .page-shell::before {
+  bottom: clamp(320px, 40vh, 440px);
+}
+
+.contact-page .site-footer {
+  background-color: #0d120c;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(8, 12, 8, 0.42) 0%,
+      rgba(8, 12, 8, 0.68) 46%,
+      rgba(8, 12, 8, 0.9) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(6, 9, 6, 0.68) 0%,
+      rgba(6, 9, 6, 0.42) 48%,
+      rgba(6, 9, 6, 0.34) 100%
+    ),
+    var(--page-footer-image);
+  background-position:
+    center center,
+    center center,
+    25% bottom;
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% auto;
+  background-repeat: no-repeat;
 }
 
 @media (prefers-reduced-motion: reduce) {

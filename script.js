@@ -102,13 +102,13 @@ const updateParallax = () => {
 
   parallaxHeroes.forEach((hero) => {
     const rect = hero.getBoundingClientRect();
-    const offset = clamp(-52, rect.top * -0.14, 72);
+    const offset = clamp(-70, rect.top * -0.2, 96);
 
     hero.style.setProperty("--hero-parallax-y", `${offset}px`);
   });
 
   if (pageShell) {
-    const bodyOffset = clamp(0, window.scrollY * 0.045, 86);
+    const bodyOffset = clamp(0, window.scrollY * 0.065, 118);
 
     pageShell.style.setProperty("--body-parallax-y", `${bodyOffset}px`);
   }
