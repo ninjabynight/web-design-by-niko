@@ -1,22 +1,33 @@
 const navToggle = document.querySelector(".nav-toggle");
 
 if (navToggle) {
-  navToggle.addEventListener("click", () => {
-    document.body.classList.toggle("menu-open");
-
-    const isOpen = document.body.classList.contains("menu-open");
+  const setNavState = (isOpen) => {
+    document.body.classList.toggle("menu-open", isOpen);
     navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  };
+
+  navToggle.addEventListener("click", () => {
+    setNavState(!document.body.classList.contains("menu-open"));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("menu-open")) {
+      setNavState(false);
+      navToggle.focus();
+    }
   });
 }
 
 // Smooth expandable project cards
 
 document.querySelectorAll("details.project-card").forEach((card) => {
+  const summary = card.querySelector("summary");
   const details = card.querySelector(".project-details");
 
-  if (!details) return;
+  if (!summary || !details) return;
 
-  card.addEventListener("click", (event) => {
+  summary.addEventListener("click", (event) => {
     event.preventDefault();
 
     if (card.dataset.animating === "true") return;
